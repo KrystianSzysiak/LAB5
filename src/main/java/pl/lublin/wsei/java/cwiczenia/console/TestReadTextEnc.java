@@ -1,4 +1,33 @@
 package pl.lublin.wsei.java.cwiczenia.console;
 
-public class TestReadTextEnc {
+import java.io.*;
+import java.nio.charset.Charset;
+import java.time.Instant;
+
+public class   TestReadTextEnc {
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader in = null;
+        BufferedWriter out = null;
+        try {
+            in = new BufferedReader(new FileReader("src/main/java/pl/lublin/wsei/java/cwiczenia/dzieweczki.txt",Charset.forName("windows-1250")));
+            out = new BufferedWriter(new FileWriter("dzieweczki_java.txt"));
+            String line;
+
+            while ((line = in.readLine()) != null) {
+                out.write(line);
+                out.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("IOException: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+            if (out != null) {
+                out.close();
+            }
+        }
+    }
 }
